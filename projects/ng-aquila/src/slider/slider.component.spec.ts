@@ -29,6 +29,7 @@ abstract class SliderTest {
   value: number = 0;
   width: number = 100;
   thumbLabel: boolean = false;
+  minMaxLabels: boolean = false;
 }
 
 declare type Coordinates = {
@@ -131,6 +132,13 @@ describe('NxSliderComponent', () => {
       const thumbLabel = fixture.nativeElement.querySelector('.nx-slider__value');
       expect(testInstance.sliderInstance.thumbLabel).toBe(true);
       expect(thumbLabel).not.toBeNull();
+    });
+
+    it('renders the Slider with min & max labels', () => {
+      createTestComponent(BasicSlider);
+      const minMaxLabels = fixture.nativeElement.querySelector('.nx-slider__label-container');
+      expect(testInstance.sliderInstance.minMaxLabels).toBe(true);
+      expect(minMaxLabels).not.toBeNull();
     });
 
     it('should set the default values', () => {
@@ -333,6 +341,16 @@ describe('NxSliderComponent', () => {
       const thumbLabel = fixture.nativeElement.querySelector('.nx-slider__value');
       expect(testInstance.sliderInstance.thumbLabel).toBe(false);
       expect(thumbLabel).toBeNull();
+    });
+  });
+
+  describe('no min & max labels', () => {
+
+    it('does not show min & max labels', () => {
+      createTestComponent(ConfigurableSlider);
+      const minMaxLabels = fixture.nativeElement.querySelector('.nx-slider__label-container');
+      expect(testInstance.sliderInstance.minMaxLabels).toBe(false);
+      expect(minMaxLabels).toBeNull();
     });
   });
 
@@ -666,7 +684,8 @@ class BasicSliderOnPush extends SliderTest {
         [nxMax]="max"
         [nxStep]="stepSize"
         [nxValue]="value"
-        [thumbLabel]="thumblabel">
+        [thumbLabel]="thumblabel"
+        [minMaxLabels]="minMaxLabels">
       </nx-slider>
     </div>
   `,

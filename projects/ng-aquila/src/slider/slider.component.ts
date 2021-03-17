@@ -162,6 +162,17 @@ export class NxSliderComponent implements ControlValueAccessor, AfterViewInit, O
     return this._thumbLabel;
   }
 
+  private _minMaxLabels: boolean = true;
+  /** Whether to display the min & max labels below the slider.*/
+  @Input()
+  set minMaxLabels(value: boolean) {
+    this._minMaxLabels = coerceBooleanProperty(value);
+    this._changeDetectorRef.markForCheck();
+  }
+  get minMaxLabels(): boolean {
+    return this._minMaxLabels;
+  }
+
   private _negative: boolean = false;
   /** Whether the negative set of styles is applied (Default: 'false').*/
   @Input('negative')
@@ -518,6 +529,7 @@ export class NxSliderComponent implements ControlValueAccessor, AfterViewInit, O
   static ngAcceptInputType_disabled: BooleanInput;
   static ngAcceptInputType_inverted: BooleanInput;
   static ngAcceptInputType_thumbLabel: BooleanInput;
+  static ngAcceptInputType_minMaxLabels: BooleanInput;
   static ngAcceptInputType_negative: BooleanInput;
   static ngAcceptInputType_value: NumberInput;
 }
